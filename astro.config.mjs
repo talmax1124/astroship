@@ -5,14 +5,14 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import react from "@astrojs/react";
 import NetlifyCMS from "astro-netlify-cms";
-import netlify from "@astrojs/netlify/functions";
+import netlify from "@astrojs/netlify";
 
 export default defineConfig({
   site: "https://knighttimesnews.com",
-  output: "server",
-  adapter: netlify(),
+  adapter: netlify({
+    publish: "src/pages",
+  }),
   integrations: [
-    netlify(),
     tailwind(),
     image({
       serviceEntryPoint: "@astrojs/image/sharp",
