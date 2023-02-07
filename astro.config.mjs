@@ -9,9 +9,8 @@ import netlify from "@astrojs/netlify";
 
 export default defineConfig({
   site: "https://knighttimesnews.com",
-  adapter: netlify({
-    publish: "src/pages",
-  }),
+  output: "server",
+  adapter: netlify(),
   integrations: [
     tailwind(),
     image({
