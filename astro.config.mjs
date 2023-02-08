@@ -2,7 +2,7 @@ import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import image from "@astrojs/image";
 import mdx from "@astrojs/mdx";
-import sitemap from "@astrojs/sitemap";
+// import sitemap from "@astrojs/sitemap";
 import react from "@astrojs/react";
 // import NetlifyCMS from "astro-netlify-cms";
 import netlify from "@astrojs/netlify";
@@ -17,7 +17,7 @@ export default defineConfig({
       serviceEntryPoint: "@astrojs/image/sharp",
     }),
     mdx(),
-    sitemap(),
+    // sitemap(),
     react(),
   ],
 });
