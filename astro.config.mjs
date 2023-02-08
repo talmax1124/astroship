@@ -21,102 +21,82 @@ export default defineConfig({
     react(),
     NetlifyCMS({
       config: {
+        // Use Netlify’s “Git Gateway” authentication and target our default branch
         backend: {
           name: "git-gateway",
-          branch: "main",
+          branch: "latest",
         },
-        media_folder: "public/uploads",
-        public_folder: "/uploads",
-
+        // Configure where our media assets are stored & served from
+        media_folder: "public/assets/blog",
+        public_folder: "/assets/blog",
+        // Configure the content collections
         collections: [
           {
-            name: "blog",
-            label: "Blog",
+            name: "posts",
+            label: "Blog Posts",
+            label_singular: "Blog Post",
             folder: "src/pages/blog",
             create: true,
-            slug: "{{year}}-{{month}}-{{day}}-{{slug}}",
+            delete: true,
             fields: [
+              { name: "title", widget: "string", label: "Post Title" },
               {
-                label: "Title",
-                name: "title",
-                widget: "string",
-              },
-              {
-                label: "Date",
                 name: "date",
                 widget: "datetime",
-              },
-              {
-                label: "Body",
-                name: "body",
-                widget: "markdown",
-              },
-
-              {
-                label: "Layout",
-                name: "layout",
-                widget: "hidden",
-                default: "layouts/Post.astro",
-              },
-
-              {
-                label: "Slug",
-                name: "slug",
-                widget: "hidden",
-                default: "{{year}}-{{month}}-{{day}}-{{slug}}",
-              },
-
-              {
-                label: "Publish",
-                name: "publish",
-                widget: "hidden",
-                default: "true",
-              },
-
-              {
-                label: "Tags",
-                name: "tags",
-                widget: "list",
-              },
-
-              {
-                label: "Image",
-                name: "image",
-                widget: "image",
+                label: "Post Date",
+                dateFormat: "YYYY-MM-DD",
+                timeFormat: "HH:mm",
                 required: false,
               },
-
               {
-                label: "Description",
-                name: "description",
-                widget: "string",
-                required: false,
-              },
-
-              {
-                label: "Author",
                 name: "author",
                 widget: "string",
+                label: "Author Name",
                 required: false,
               },
-
               {
-                label: "Category",
-                name: "category",
+                name: "authorURL",
                 widget: "string",
+                label: "Author URL",
+                required: false,
+              },
+              {
+                name: "description",
+                widget: "string",
+                label: "Description",
+                required: false,
+              },
+              { name: "body", widget: "markdown", label: "Post Body" },
+              {
+                name: "layout",
+                widget: "select",
+                default: "../../layouts/BlogLayout.astro",
+                options: [
+                  {
+                    label: "Blog Post",
+                    value: "../../layouts/BlogLayout.astro",
+                  },
+                ],
+              },
+
+              {
+                name: "image",
+                widget: "image",
+                label: "Post Image",
                 required: false,
               },
 
               {
-                label: "Featured",
-                name: "featured",
-                widget: "boolean",
+                name: "imageAlt",
+                widget: "string",
+                label: "Image Alt Text",
                 required: false,
               },
             ],
           },
         ],
       },
+      previewStyles: ["./src/styles/global.css"],
     }),
   ],
 });
