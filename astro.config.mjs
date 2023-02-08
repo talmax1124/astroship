@@ -96,7 +96,6 @@ export default defineConfig({
           },
         ],
       },
-      previewStyles: ["./src/styles/global.css"],
     }),
   ],
 });
